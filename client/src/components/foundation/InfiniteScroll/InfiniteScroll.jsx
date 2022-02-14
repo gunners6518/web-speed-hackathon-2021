@@ -35,10 +35,11 @@ const InfiniteScroll = ({ children, fetchMore, items }) => {
     prevReachedRef.current = false;
     handler();
 
-    document.addEventListener('wheel', handler, { passive: false });
-    document.addEventListener('touchmove', handler, { passive: false });
-    document.addEventListener('resize', handler, { passive: false });
-    document.addEventListener('scroll', handler, { passive: false });
+    //do: Passive eventを設定
+    document.addEventListener('wheel', handler, { passive: true, capture: true });
+    document.addEventListener('touchmove', handler, { passive: true, capture: true });
+    document.addEventListener('resize', handler, { passive: true, capture: true });
+    document.addEventListener('scroll', handler, { passive: true, capture: true });
     return () => {
       document.removeEventListener('wheel', handler);
       document.removeEventListener('touchmove', handler);
